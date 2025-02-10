@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class MusicApp extends StatefulWidget {
   const MusicApp({Key? key}) : super(key: key);
@@ -9,128 +12,21 @@ class MusicApp extends StatefulWidget {
 }
 
 class _MusicAppState extends State<MusicApp> {
-  List musicList = [
-    {
-      "title": "Life is a Dream",
-      "artist": "Michael Ramir",
-      "cover": "https://images.pexels.com/photos/1884306/pexels-photo-1884306.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-      "url": "http://opsonin.com.bd/ramadan/surah/001.mp3",
-    },
-    {
-      "title": "Feeling Happy",
-      "artist": "Ahjay Stelino",
-      "cover": "https://images.pexels.com/photos/2682877/pexels-photo-2682877.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-      "url": "http://opsonin.com.bd/ramadan/surah/002.mp3",
-    },
-    {
-      "title": "Dance with Me",
-      "artist": "Ahjay Stelino",
-      "cover": "https://images.pexels.com/photos/235615/pexels-photo-235615.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-      "url": "http://opsonin.com.bd/ramadan/surah/003.mp3",
-    },
-    {
-      "title": "Sleepy Cat",
-      "artist": "Alejandro Magaña",
-      "cover": "https://images.pexels.com/photos/1122868/pexels-photo-1122868.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-      "url": "http://opsonin.com.bd/ramadan/surah/004.mp3",
-    },
-    {
-      "title": "Delightful",
-      "artist": "Ahjay Stelino",
-      "cover": "https://images.pexels.com/photos/259707/pexels-photo-259707.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-      "url": "http://opsonin.com.bd/ramadan/surah/005.mp3",
-    },
-    {
-      "title": "Life is a Dream",
-      "artist": "Michael Ramir",
-      "cover": "https://images.pexels.com/photos/1884306/pexels-photo-1884306.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-      "url": "http://opsonin.com.bd/ramadan/surah/006.mp3",
-    },
-    {
-      "title": "Feeling Happy",
-      "artist": "Ahjay Stelino",
-      "cover": "https://images.pexels.com/photos/2682877/pexels-photo-2682877.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-      "url": "http://opsonin.com.bd/ramadan/surah/007.mp3",
-    },
-    {
-      "title": "Dance with Me",
-      "artist": "Ahjay Stelino",
-      "cover": "https://images.pexels.com/photos/235615/pexels-photo-235615.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-      "url": "http://opsonin.com.bd/ramadan/surah/008.mp3",
-    },
-    {
-      "title": "Sleepy Cat",
-      "artist": "Alejandro Magaña",
-      "cover": "https://images.pexels.com/photos/1122868/pexels-photo-1122868.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-      "url": "http://opsonin.com.bd/ramadan/surah/009.mp3",
-    },
-    {
-      "title": "Delightful",
-      "artist": "Ahjay Stelino",
-      "cover": "https://images.pexels.com/photos/259707/pexels-photo-259707.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-      "url": "http://opsonin.com.bd/ramadan/surah/010.mp3",
-    },
-    {
-      "title": "Life is a Dream",
-      "artist": "Michael Ramir",
-      "cover": "https://images.pexels.com/photos/1884306/pexels-photo-1884306.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-      "url": "http://opsonin.com.bd/ramadan/surah/001.mp3",
-    },
-    {
-      "title": "Feeling Happy",
-      "artist": "Ahjay Stelino",
-      "cover": "https://images.pexels.com/photos/2682877/pexels-photo-2682877.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-      "url": "http://opsonin.com.bd/ramadan/surah/002.mp3",
-    },
-    {
-      "title": "Dance with Me",
-      "artist": "Ahjay Stelino",
-      "cover": "https://images.pexels.com/photos/235615/pexels-photo-235615.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-      "url": "http://opsonin.com.bd/ramadan/surah/003.mp3",
-    },
-    {
-      "title": "Sleepy Cat",
-      "artist": "Alejandro Magaña",
-      "cover": "https://images.pexels.com/photos/1122868/pexels-photo-1122868.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-      "url": "http://opsonin.com.bd/ramadan/surah/004.mp3",
-    },
-    {
-      "title": "Delightful",
-      "artist": "Ahjay Stelino",
-      "cover": "https://images.pexels.com/photos/259707/pexels-photo-259707.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-      "url": "http://opsonin.com.bd/ramadan/surah/005.mp3",
-    },
-    {
-      "title": "Life is a Dream",
-      "artist": "Michael Ramir",
-      "cover": "https://images.pexels.com/photos/1884306/pexels-photo-1884306.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-      "url": "http://opsonin.com.bd/ramadan/surah/006.mp3",
-    },
-    {
-      "title": "Feeling Happy",
-      "artist": "Ahjay Stelino",
-      "cover": "https://images.pexels.com/photos/2682877/pexels-photo-2682877.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-      "url": "http://opsonin.com.bd/ramadan/surah/007.mp3",
-    },
-    {
-      "title": "Dance with Me",
-      "artist": "Ahjay Stelino",
-      "cover": "https://images.pexels.com/photos/235615/pexels-photo-235615.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-      "url": "http://opsonin.com.bd/ramadan/surah/008.mp3",
-    },
-    {
-      "title": "Sleepy Cat",
-      "artist": "Alejandro Magaña",
-      "cover": "https://images.pexels.com/photos/1122868/pexels-photo-1122868.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-      "url": "http://opsonin.com.bd/ramadan/surah/009.mp3",
-    },
-    {
-      "title": "Delightful",
-      "artist": "Ahjay Stelino",
-      "cover": "https://images.pexels.com/photos/259707/pexels-photo-259707.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-      "url": "http://opsonin.com.bd/ramadan/surah/010.mp3",
-    },
-  ];
+  List<dynamic>? chapters;
+
+  loadData() async {
+    var data = await rootBundle.loadString("surah/quran_all_surah_list.json");
+    Map<String, dynamic> quranSurah = await jsonDecode(data);
+    chapters = await quranSurah["chapters"];
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    loadData();
+    // TODO: implement initState
+    super.initState();
+  }
 
   String currentTitle = "";
   String currentArtist = "";
@@ -186,138 +82,154 @@ class _MusicAppState extends State<MusicApp> {
           ),
         ),
         child: SafeArea(
-          child: Column(
-            children: [
-              Expanded(
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: musicList.length,
-                  itemBuilder: (context, index) => InkWell(
-                    onTap: () {
-                      playMusic(musicList[index]["url"]);
-                      setState(() {
-                        currentTitle = musicList[index]["title"];
-                        currentArtist = musicList[index]["artist"];
-                        currentCover = musicList[index]["cover"];
-                      });
-                    },
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        backgroundImage: NetworkImage(
-                          musicList[index]["cover"],
-                        ),
-                      ),
-                      title: Text(
-                        musicList[index]["title"],
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                      subtitle: Text(
-                        musicList[index]["artist"],
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w200,
-                        ),
-                      ),
-                      trailing: Container(
-                        margin: EdgeInsets.all(17.0),
-                        child: Icon(
-                          Icons.music_note,
-                          color: Colors.blueGrey.shade200,
-                        ),
+          child: chapters != null
+              ? Column(
+                  children: [
+                    InkWell(
+                      onTap: () async {
+                        print(chapters);
+                      },
+                      child: Container(
+                        height: 100,
+                        width: 100,
+                        color: Colors.green,
                       ),
                     ),
-                  ),
-                ),
-              ),
-              currentCover != ""
-                  ? Column(
-                      children: [
-                        Container(
-                          color: Colors.white,
-                          height: 1.0,
-                        ),
-                        ListTile(
-                          title: Text(
-                            currentTitle,
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
-                          subtitle: Text(
-                            currentArtist,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w200,
-                            ),
-                          ),
-                          trailing: Container(
-                            height: 40.0,
-                            width: 40.0,
-                            margin: EdgeInsets.all(7.0),
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              border: Border.all(
-                                color: Colors.grey,
-                              ),
-                            ),
-                            child: IconButton(
-                              padding: EdgeInsets.zero,
-                              onPressed: () {
-                                if (isPlaying) {
-                                  _audioPlayer.pause();
-                                  setState(() {
-                                    btnIcon = Icons.play_arrow;
-                                    isPlaying = false;
-                                  });
-                                } else {
-                                  _audioPlayer.resume();
-
-                                  setState(() {
-                                    btnIcon = Icons.pause;
-                                    isPlaying = true;
-                                  });
-                                }
-                              },
-                              icon: Icon(
-                                btnIcon,
-                                size: 26,
+                    Expanded(
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: chapters!.length,
+                        itemBuilder: (context, index) => InkWell(
+                          onTap: () {
+                            print(chapters);
+                            var fileName = "";
+                            if (index < 9) {
+                              fileName = "http://opsonin.com.bd/ramadan/surah/00${index + 1}.mp3";
+                            } else if (index < 99) {
+                              fileName = "http://opsonin.com.bd/ramadan/surah/0${index + 1}.mp3";
+                            } else {
+                              fileName = "http://opsonin.com.bd/ramadan/surah/${index + 1}.mp3";
+                            }
+                            playMusic(fileName);
+                            setState(() {
+                              currentTitle = chapters![index]["bn_name"];
+                              currentArtist = chapters![index]["type"];
+                              currentCover = chapters![index]["verse_count"];
+                            });
+                          },
+                          child: ListTile(
+                            title: Text(
+                              chapters![index]["bn_name"],
+                              style: TextStyle(
                                 color: Colors.white,
                               ),
                             ),
+                            subtitle: Text(
+                              chapters![index]["verse_count"],
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w200,
+                              ),
+                            ),
+                            trailing: Container(
+                              margin: EdgeInsets.all(17.0),
+                              child: Icon(
+                                Icons.music_note,
+                                color: Colors.blueGrey.shade200,
+                              ),
+                            ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            left: 22.0,
-                            right: 30.0,
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      ),
+                    ),
+                    currentCover != ""
+                        ? Column(
                             children: [
-                              Text(
-                                "${musicPosition.inMinutes}:${musicPosition.inSeconds.remainder(60)}",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w200,
+                              Container(
+                                color: Colors.white,
+                                height: 1.0,
+                              ),
+                              ListTile(
+                                title: Text(
+                                  currentTitle,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                subtitle: Text(
+                                  currentArtist,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w200,
+                                  ),
+                                ),
+                                trailing: Container(
+                                  height: 40.0,
+                                  width: 40.0,
+                                  margin: EdgeInsets.all(7.0),
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                  child: IconButton(
+                                    padding: EdgeInsets.zero,
+                                    onPressed: () {
+                                      if (isPlaying) {
+                                        _audioPlayer.pause();
+                                        setState(() {
+                                          btnIcon = Icons.play_arrow;
+                                          isPlaying = false;
+                                        });
+                                      } else {
+                                        _audioPlayer.resume();
+
+                                        setState(() {
+                                          btnIcon = Icons.pause;
+                                          isPlaying = true;
+                                        });
+                                      }
+                                    },
+                                    icon: Icon(
+                                      btnIcon,
+                                      size: 26,
+                                      color: Colors.white,
+                                    ),
+                                  ),
                                 ),
                               ),
-                              Text(
-                                "${musicDuration.inMinutes}:${musicDuration.inSeconds.remainder(60)}",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w200,
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                  left: 22.0,
+                                  right: 30.0,
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Text(
+                                      "${musicPosition.inMinutes}:${musicPosition.inSeconds.remainder(60)}",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w200,
+                                      ),
+                                    ),
+                                    Text(
+                                      "${musicDuration.inMinutes}:${musicDuration.inSeconds.remainder(60)}",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w200,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ],
-                          ),
-                        ),
-                      ],
-                    )
-                  : SizedBox.shrink(),
-            ],
-          ),
+                          )
+                        : SizedBox.shrink(),
+                  ],
+                )
+              : SizedBox.shrink(),
         ),
       ),
     );
